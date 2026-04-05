@@ -16,8 +16,22 @@ Game::Game() {
 Game::takeTurn() {
 	turnInitPrint();
 	Card* card = drawCard();
-	std::cout << currentPlayer->getName() << " Draws a " << card->getName() << std::endl;
+	cardDrawMessage(card);
+	currentPlayer->printPlayArea();
+
 	currentPlayer->playCard(card, *this);
+
+	std::string response; 
+
+	while (!currentPlayer->isBust(card)) {
+		cin >> "Draw again? (y/n): " >> response;
+
+		if (response == "y") {
+			Card* card = drawCard();
+			cardDrawMessage(card);
+		}
+
+	}
 }
 
 Game::drawCard() {
@@ -27,6 +41,13 @@ Game::drawCard() {
 	deck.pop_back();
 	return card;
 }
+
+Game::cardDrawMessage(Card* card) {
+	std::cout << currentPlayer->getName() << " Draws a " << card->getName() << std::endl;
+	std::cout << "        " << card->specialAbility() << std::endl;
+}
+
+
 
 Game::turnInitPrint() {
 	std::cout << currentPlayer->getName() << "'s turn." << std::endl;

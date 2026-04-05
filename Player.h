@@ -1,15 +1,15 @@
 
 #include <string>
-
-#include "Bank.h"
-#include "PlayArea.h"
+#include "Card.h"
+#include <map>
+#include <vector>
 
 class Player {
 	std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue", "Sasha", "Tina", "Marge" };
 	_name = names[rand() % 10];
 
-	PlayArea playArea;
-	Bank bank;
+	std::map<CardType, std::vector<Card*>> playArea;
+	CardCollection bank;
 
 public:
 
@@ -18,10 +18,12 @@ public:
 	// returns true if this causes the player to bust,
 	// otherwise the card's ability is performed and this function returns false
 	bool playCard(Card* card, Game& game);
-	bool isBust();
+	void addToPlayArea(Card* card);
+	bool isBust const(Card* card);
 	void printPlayArea();
 	void printBank();
 	void getName() const;
+	int getScore() const;
 
 };
 

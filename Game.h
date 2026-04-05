@@ -14,13 +14,19 @@
 "|___/ |_| \\__,_| \\_/\\_/\n"
 #endif //GAME_TITLE_H
 
+#include <map>
+#include <string>
+
 class Game {
 	Player player1;
 	Player player2;
 	CardCollection deck;
+	std::map<CardType, std::vector<Card*>> discardPile;
 	int round;
 	int turn;
 	Player* currentPlayer;
+
+	void cardDrawMessage(Card* card);
 
 public:
 	/* When you initialise a game, you have to init two players. All their belongings ie play area and deck should be in their own class. */
