@@ -1,8 +1,3 @@
 
-Card::Card() {}
+void Card::willAddToBank(Game& game, Player& player) {}
 
-Card::type() const {
-	return suit;
-}
-
-Card::~Card() {}

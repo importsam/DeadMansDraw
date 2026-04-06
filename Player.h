@@ -7,20 +7,22 @@
 class Player {
 	std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue", "Sasha", "Tina", "Marge" };
 	_name = names[rand() % 10];
-
+	
 	std::map<CardType, std::vector<Card*>> playArea;
 	CardCollection bank;
 
 public:
 
-
+	bool isBust (Card* card) const;
 	// plays the card into the play area
 	// returns true if this causes the player to bust,
 	// otherwise the card's ability is performed and this function returns false
 	bool playCard(Card* card, Game& game);
 	void addToPlayArea(Card* card);
-	bool isBust const(Card* card);
+	void addToBank(std::map<CardType, std::vector<Card*>>& playArea);
+	
 	void printPlayArea();
+	void clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile);
 	void printBank();
 	void getName() const;
 	int getScore() const;

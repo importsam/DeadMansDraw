@@ -25,6 +25,7 @@ class Game {
 	int round;
 	int turn;
 	Player* currentPlayer;
+	Player* otherPlayer;
 
 	void cardDrawMessage(Card* card);
 
@@ -37,6 +38,8 @@ public:
 	Card* drawCard();
 	void initDeck();
 	void shuffleDeck(CardCollection& cards);
+	Player* getCurrentPlayer() const { return currentPlayer; }
+	Player* getOtherPlayer() const { return otherPlayer; }
 	~Game();
 
 };

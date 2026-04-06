@@ -18,21 +18,15 @@ class Card {
 public:
 	Card(CardType suit, int pointValue) : suit(suit), pointValue(pointValue) {}
 	
-	const CardType& type() const;
+	const CardType& type() const { return suit };
+
+	int getPointValue() const { return pointValue; }
 
 	virtual std::string str() const = 0;
 
 	virtual void play(Game& game, Player& player) = 0;
 
-	virtual void willAddToBank(Game& game, Player& player) {}
-
-	CardType& type() const {
-		return suit;
-	}
-
-	int getPointValue() const {
-		return pointValue;
-	}
+	virtual void willAddToBank(Game& game, Player& player) {};
 
 	virtual ~Card() {}
 		

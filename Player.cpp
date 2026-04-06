@@ -1,34 +1,67 @@
 
 #include "Player.h"
 
-Player::playCard(Card* card, Game& game) {
-	playArea.push_back(card);
+bool Player::playCard(Card* card, Game& game) {
+	
 
 	if (isBust(card)) {
 		std::cout << "BUST! " << _name << " loses all cards in play area." << std::endl;
 		return true;
 	}
 
+	addToPlayArea(card);
+
 	card->play(game, *this);
 	return false;
 }
 
-Player::isBust(Card* card) {
+void Player::addToPlayArea(Card* card) {
+	playArea[card->type()].push_back(card);
+}
+
+void Player::addToBank(std::map<CardType, std::vector<Card*>>& playArea) {
+	for (auto& pair : playArea) {
+		for (Card* card : pair.second) {
+			card->willAddToBank(game, *this);
+			bank[pair.first].push_back(card);
+		}
+	}
+	playArea.clear();
+}
+
+void Player::isBust(Card* card) const {
 	return playArea.count(card->type()) > 0;
 }
 
-Player::printPlayArea() {
-	cout << _name << "'s Play Area:" << endl;
+void Player::printPlayArea() {
+	return;
+}
+
+void Player::clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile) {
 	for (auto& pair : playArea) {
-		for
+		for (Card* card : pair.second) {
+			discardPile[card->type()].push_back(card);
+		}
+	}
+	playArea.clear();
+}
+
+void Player::printBank() {
+	cout << _name << "'s Bank:" << endl;
+	for (Card* card : bank) {
+		cout << card->str() << endl;
 	}
 }
 
-Player::getScore() {
+std::string Player::getName() const {
+	return _name;
+}
+
+int Player::getScore() const {
 	int score = 0;
-	for (auto& pair : playArea) {
-		for (std::vector<Card*> cards : pair.second) {
-			score += cards.front()->getPointValue();
+	for (auto& pair : bank) {
+		for (Card* card : pair.second) {
+			score += card->getPointValue();
 		}
 	}
 	return score;
