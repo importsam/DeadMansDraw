@@ -17,6 +17,9 @@
 #include <map>
 #include <string>
 
+#include "Card.h"
+#include "Player.h"
+
 class Game {
 	Player player1;
 	Player player2;
@@ -33,6 +36,8 @@ public:
 	/* When you initialise a game, you have to init two players. All their belongings ie play area and deck should be in their own class. */
 
 	Game();
+	void gameStart();
+	void gameEnd() const;
 	void takeTurn();
 	Card* drawCard();
 	void initDeck();
@@ -40,6 +45,7 @@ public:
 	Player* getCurrentPlayer() const { return currentPlayer; }
 	Player* getOtherPlayer() const { return otherPlayer; }
 	Card* drawFromDiscardPile();
+	int deckEmpty() const { return deck.empty(); }
 	void bustPlayer(Player& player);
 	~Game();
 

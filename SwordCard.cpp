@@ -1,5 +1,7 @@
 #include "SwordCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 std::string SwordCard::str() const {
 	return "Sword(" + std::to_string(getPointValue()) + ")";
 }
@@ -13,10 +15,10 @@ void SwordCard::play(Game& game, Player& player) {
 		return;
 	}
 
-	cout << "        Steal the top card of any suit from the other player's Bank into your Play Area:" << endl;
+	std::cout << "        Steal the top card of any suit from the other player's Bank into your Play Area:" << endl;
 	int i = 1;
 	for (auto& pair : otherPlayer.getBank()) {
-		cout << "        (" << i << ") " << pair.second.front()->str() << endl;
+		std::cout << "        (" << i << ") " << pair.second.front()->str() << endl;
 		i++;
 	}
 

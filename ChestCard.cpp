@@ -1,5 +1,7 @@
 #include "ChestCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 ChestCard::str() const {
 	return "Chest(" + std::to_string(getPointValue()) + ")";
 }

@@ -1,5 +1,7 @@
 #include "OracleCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 std::string OracleCard::str() const {
 	return "Oracle(" + std::to_string(getPointValue()) + ")";
 }

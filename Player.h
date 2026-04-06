@@ -1,19 +1,17 @@
-
+#pragma once
 #include <string>
-#include "Card.h"
 #include <map>
 #include <vector>
+#include "Card.h"
 
 class Player {
-	std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue", "Sasha", "Tina", "Marge" };
-	_name = names[rand() % 10];
-	
+	std::string _name;
 	std::map<CardType, CardCollection> playArea;
 	std::map<CardType, CardCollection> bank;
 	
 
 public:
-
+	Player();
 	bool isBust (Card* card) const;
 	// plays the card into the play area
 	// returns true if this causes the player to bust,
@@ -21,16 +19,15 @@ public:
 	bool playCard(Card* card, Game& game);
 	void addToPlayArea(Card* card);
 	void addToBank(std::map<CardType, std::vector<Card*>>& playArea);
-	
 	void printPlayArea();
 	void clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile);
 	void printBank();
-	void getName() const;
+	std::string getName() const;
 	int getScore() const;
-	void removeTopCardFromBank(CardType type);
+	Card* removeTopCardFromBank(CardType type);
 	//Card* pickTopCardFromBank();
 
-	CardCollection getBank() const { return bank; }
+	std::map<CardType, CardCollection>& getBank() { return bank; }
 
 };
 

@@ -1,5 +1,7 @@
 #include "CannonCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 std::string CannonCard::str() const {
 	return "Cannon(" + std::to_string(getPointValue()) + ")";
 }

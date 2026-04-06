@@ -1,5 +1,7 @@
 #include "KrakenCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 KrakenCard::str() const {
 	return "Kraken(" + std::to_string(getPointValue()) + ")";
 }

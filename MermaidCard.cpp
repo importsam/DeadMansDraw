@@ -1,5 +1,7 @@
 #include "MermaidCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 std::string MermaidCard::str() const {
 	return "Cannon(" + std::to_string(getPointValue()) + ")";
 }

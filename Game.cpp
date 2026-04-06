@@ -1,6 +1,19 @@
 #include "Game.h"
 #include "Player.h"
 #include "Card.h"
+#include <iostream>
+#include "CannonCard.h"
+#include "ChestCard.h"
+#include "KeyCard.h"
+#include "SwordCard.h"
+#include "HookCard.h"
+#include "OracleCard.h"
+#include "MapCard.h"
+#include "KrakenCard.h"
+#include "MermaidCard.h"
+#include <algorithm>
+#include <random> 
+#include <utility> 
 
 Game::Game() {
 	round = 1;
@@ -12,6 +25,29 @@ Game::Game() {
 	initDeck();
 	std::cout << GAME_TITLE << std::endl;
 	printf("Starting Dead Man's Draw++\n");
+	gameStart();
+}
+
+void Game::gameStart() {
+	while (!deckEmpty()) {
+		takeTurn();
+	}
+	gameEnd();
+}
+
+void Game::gameEnd() const {
+	std::cout << "Game Over!" << std::endl;
+	std::cout << player1.getName() << "'s score: " << player1.getScore() << std::endl;
+	std::cout << player2.getName() << "'s score: " << player2.getScore() << std::endl;
+	if (player1.getScore() > player2.getScore()) {
+		std::cout << player1.getName() << " wins!" << std::endl;
+	}
+	else if (player2.getScore() > player1.getScore()) {
+		std::cout << player2.getName() << " wins!" << std::endl;
+	}
+	else {
+		std::cout << "It's a tie!" << std::endl;
+	}
 }
 
 void Game::takeTurn() {
@@ -112,4 +148,16 @@ void Game::bustPlayer(Player& player) {
 	player.clearPlayArea(discardPile);
 }
 
-Game::~Game() {}
+Game::~Game() {
+	for (Card* card : deck) {
+		delete card;
+	}
+
+	deck.clear();
+	
+	for (Card* card : discardPile) {
+		delete card;
+	}
+
+	discardPile.clear();
+}

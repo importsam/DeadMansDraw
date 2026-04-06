@@ -12,7 +12,20 @@ endif()
 project ("DeadMansDraw")
 
 # Add source to this project's executable.
-add_executable (DeadMansDraw "DeadMansDraw.cpp" "DeadMansDraw.h")
+add_executable(DeadMansDraw
+    DeadMansDraw.cpp
+    Game.cpp
+    Player.cpp
+    CannonCard.cpp
+    ChestCard.cpp
+    KeyCard.cpp
+    SwordCard.cpp
+    HookCard.cpp
+    OracleCard.cpp
+    MapCard.cpp
+    KrakenCard.cpp
+    MermaidCard.cpp
+)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET DeadMansDraw PROPERTY CXX_STANDARD 20)

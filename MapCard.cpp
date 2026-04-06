@@ -1,5 +1,7 @@
 #include "MapCard.h"
-
+#include <iostream>
+#include "Game.h"
+#include "Player.h"
 std::string MapCard::str() const {
 	return "Map(" + std::to_string(getPointValue()) + ")";
 }

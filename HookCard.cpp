@@ -1,5 +1,8 @@
 #include "HookCard.h"
+#include <iostream>
 
+#include "Game.h"
+#include "Player.h"
 HookCard::str() const {
 	return "Hook(" + std::to_string(getPointValue()) + ")";
 }

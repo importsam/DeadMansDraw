@@ -1,5 +1,8 @@
 #include "KeyCard.h"
+#include <iostream>
 
+#include "Game.h"
+#include "Player.h"
 std::string KeyCard::str() const {
 	return "Key(" + std::to_string(getPointValue()) + ")";
 }

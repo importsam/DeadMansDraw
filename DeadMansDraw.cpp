@@ -1,12 +1,11 @@
-﻿// DeadMansDraw.cpp : Defines the entry point for the application.
-//
+﻿
 
-#include "DeadMansDraw.h"
-
-using namespace std;
+#include "Game.h"
+#include <iostream>
 
 int main()
 {	
-	cout << "Hello CMake." << endl;
+	std::cout << "Starting game..." << std::endl;
+	Game game;
 	return 0;
 }

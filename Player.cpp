@@ -1,5 +1,11 @@
 
 #include "Player.h"
+#include <iostream>
+
+Player::Player() {
+	std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue", "Sasha", "Tina", "Marge" };
+	_name = names[rand() % 10];
+}
 
 bool Player::playCard(Card* card, Game& game) {
 	
@@ -37,7 +43,7 @@ void Player::addToBank(std::map<CardType, std::vector<Card*>>& playArea) {
 	playArea.clear();
 }
 
-void Player::isBust(Card* card) const {
+bool Player::isBust(Card* card) const {
 	return playArea.count(card->type()) > 0;
 }
 
@@ -55,9 +61,9 @@ void Player::clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile) 
 }
 
 void Player::printBank() {
-	cout << _name << "'s Bank:" << endl;
+	std::cout << _name << "'s Bank:" << std::endl;
 	for (Card* card : bank) {
-		cout << card->str() << endl;
+		std::cout << card->str() << std::endl;
 	}
 }
 
@@ -77,7 +83,7 @@ int Player::getScore() const {
 
 Card* Player::removeTopCardFromBank(CardType suit) {
 	if (bank.count(suit) == 0) { return nullptr; }
-	if (bank[suit].empty()) { bank.erase(suit) }
+	if (bank[suit].empty()) { bank.erase(suit); }
 
 	Card* card = bank[suit].front();
 

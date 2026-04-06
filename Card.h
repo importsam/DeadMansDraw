@@ -2,13 +2,14 @@
 
 #include <vector>
 #include <string>
-
+#include "Game.h"
+#include "Player.h"
 class Game;
 class Player;
 
 enum CardType { Cannon, Chest, Key, Anchor, Sword, Hook, Oracle, Map, Mermaid, Kraken };
 
-typedef std::vector<Card*> CardCollection;
+
 
 class Card {
 
@@ -18,7 +19,7 @@ class Card {
 public:
 	Card(CardType suit, int pointValue) : suit(suit), pointValue(pointValue) {}
 	
-	const CardType& type() const { return suit };
+	const CardType& type() const { return suit; }
 
 	int getPointValue() const { return pointValue; }
 
@@ -32,7 +33,7 @@ public:
 		
 };
 
-
+typedef std::vector<Card*> CardCollection;
 /*
 Card — Represents the base type of a card in the game. The Card class should be an abstract
 class that other types of card classes (e.g. Cannon, Chest, Key, Sword, Hook, Oracle, Map,
