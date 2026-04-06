@@ -5,8 +5,5 @@ ChestCard::str() const {
 }
 
 ChestCard::play(Game& game, Player& player) {
-	// Discard the top card (i.e. the highest value) of any suit from
-	//the other player’s Bank to the Discard Pile.
-
-
+	std::cout << "        No immediate effect. If banked with a key, draw as many bonus cards from the Discard pile as you moved into your Bank." << std::endl;
 }

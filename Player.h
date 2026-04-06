@@ -8,8 +8,9 @@ class Player {
 	std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue", "Sasha", "Tina", "Marge" };
 	_name = names[rand() % 10];
 	
-	std::map<CardType, std::vector<Card*>> playArea;
-	CardCollection bank;
+	std::map<CardType, CardCollection> playArea;
+	std::map<CardType, CardCollection> bank;
+	
 
 public:
 
@@ -26,6 +27,10 @@ public:
 	void printBank();
 	void getName() const;
 	int getScore() const;
+	void removeTopCardFromBank(CardType type);
+	//Card* pickTopCardFromBank();
+
+	CardCollection getBank() const { return bank; }
 
 };
 

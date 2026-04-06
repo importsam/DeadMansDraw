@@ -35,6 +35,7 @@ void Game::takeTurn() {
 			cardDrawMessage(card);
 			bustStatus = currentPlayer->playCard(card, *this);
 		}
+		else if (response == "n") break;
 
 	}
 
@@ -44,6 +45,10 @@ void Game::takeTurn() {
 	else {
 		currentPlayer->addToBank(*this);
 	}
+
+	std::swap(currentPlayer, otherPlayer);
+	turn++;
+	if (turn % 2 == 1) { round++; }
 }
 
 Card* Game::drawCard() {
@@ -62,6 +67,7 @@ void Game::cardDrawMessage(Card* card) {
 void Game::turnInitPrint() {
 	std::cout << currentPlayer->getName() << "'s turn." << std::endl;
 	std::cout << currentPlayer->getName() << "'s Bank:" << std::endl << currentPlayer->printBank() << std::endl;
+	currentPlayer->printBank();
 }
 
 void Game::initDeck() {
@@ -89,6 +95,21 @@ void Game::shuffleDeck(CardCollection& cards) {
 	CardCollection shuffleDeck{ cards.begin(), cards.end() };
 	std::shuffle(shuffleDeck.begin(), shuffleDeck.end(), std::mt19937{ std::random_device{}() });
 	std::copy(shuffleDeck.begin(), shuffleDeck.end(), cards.begin());
+}
+
+Card* Game::drawFromDiscardPile() {
+	if (discardPile.empty()) {
+		return nullptr;
+	}
+
+	Card* card = discardPile.back();
+	discardPile.pop_back();
+	return card;
+}
+
+void Game::bustPlayer(Player& player) {
+	std::cout << "BUST! " << player.getName() << "loses all cards in play area." << std::endl;
+	player.clearPlayArea(discardPile);
 }
 
 Game::~Game() {}

@@ -21,7 +21,7 @@ class Game {
 	Player player1;
 	Player player2;
 	CardCollection deck;
-	std::map<CardType, std::vector<Card*>> discardPile;
+	CardCollection discardPile;
 	int round;
 	int turn;
 	Player* currentPlayer;
@@ -33,13 +33,14 @@ public:
 	/* When you initialise a game, you have to init two players. All their belongings ie play area and deck should be in their own class. */
 
 	Game();
-	
 	void takeTurn();
 	Card* drawCard();
 	void initDeck();
 	void shuffleDeck(CardCollection& cards);
 	Player* getCurrentPlayer() const { return currentPlayer; }
 	Player* getOtherPlayer() const { return otherPlayer; }
+	Card* drawFromDiscardPile();
+	void bustPlayer(Player& player);
 	~Game();
 
 };

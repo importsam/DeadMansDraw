@@ -26,6 +26,14 @@ void Player::addToBank(std::map<CardType, std::vector<Card*>>& playArea) {
 			bank[pair.first].push_back(card);
 		}
 	}
+
+	// move cards from play area to bank
+	for (auto& pair : playArea) {
+		for (Card* card : pair.second) {
+			bank[pair.first].push_back(card);
+		}
+	}
+
 	playArea.clear();
 }
 
@@ -66,3 +74,14 @@ int Player::getScore() const {
 	}
 	return score;
 }
+
+Card* Player::removeTopCardFromBank(CardType suit) {
+	if (bank.count(suit) == 0) { return nullptr; }
+	if (bank[suit].empty()) { bank.erase(suit) }
+
+	Card* card = bank[suit].front();
+
+	return card;
+
+}
+
