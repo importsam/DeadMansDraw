@@ -15,9 +15,11 @@
 #include <random> 
 #include <utility> 
 
+// 
 Game::Game() {
 	round = 1;
 	turn = 1;
+	busted = false;
 	player1 = Player();
 	player2 = Player();
 	currentPlayer = &player1;
@@ -51,6 +53,7 @@ void Game::gameEnd() const {
 }
 
 void Game::takeTurn() {
+	busted = false;
 	turnInitPrint();
 	Card* card = drawCard();
 	if (card == nullptr) {
@@ -60,7 +63,7 @@ void Game::takeTurn() {
 
 	bool bustStatus = currentPlayer->playCard(card, *this);
 
-	while (!bustStatus) {
+	while (!bustStatus && !busted) {
 		currentPlayer->printPlayArea();
 
 		std::string response;
@@ -71,6 +74,9 @@ void Game::takeTurn() {
 		// doesnt handle invalid input
 		if (response == "y") {
 			card = drawCard();
+			if (card == nullptr) {
+				break;
+			}
 			cardDrawMessage(card);
 			bustStatus = currentPlayer->playCard(card, *this);
 		}
@@ -78,8 +84,8 @@ void Game::takeTurn() {
 
 	}
 
-	if (bustStatus) {
-		currentPlayer->clearPlayArea(discardPile);
+	if (bustStatus || busted) {
+		bustPlayer(*currentPlayer);
 	}
 	else {
 		currentPlayer->addToBank(*this);
@@ -146,6 +152,7 @@ Card* Game::drawFromDiscardPile() {
 }
 
 void Game::bustPlayer(Player& player) {
+	busted = true;
 	std::cout << "BUST! " << player.getName() << " loses all cards in play area." << std::endl;
 	player.clearPlayArea(discardPile);
 }

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef KEYCARD_H
+#define KEYCARD_H
+
 #include "Card.h"
 
 class KeyCard : public Card {
@@ -12,3 +14,5 @@ public:
 
 	void willAddToBank(Game& game, Player& player) override;
 };
+
+#endif //KEYCARD_H

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SWORDCARD_H
+#define SWORDCARD_H
+
 #include "Card.h"
 
 class SwordCard : public Card {
@@ -11,3 +13,5 @@ public:
 
 	void play(Game& game, Player& player) override;
 };
+
+#endif //SWORDCARD_H

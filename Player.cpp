@@ -11,7 +11,6 @@ bool Player::playCard(Card* card, Game& game) {
 	
 
 	if (isBust(card)) {
-		std::cout << "BUST! " << _name << " loses all cards in play area." << std::endl;
 		return true;
 	}
 

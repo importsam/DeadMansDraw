@@ -1,4 +1,5 @@
-#pragma once 
+#ifndef CARD_H
+#define CARD_H
 
 #include <vector>
 #include <string>
@@ -62,3 +63,5 @@ to handle this:
 We also recommend type def-ing a card collection:
 • typedef std::vector<Card*> CardCollection;
 */
+
+#endif //CARD_H

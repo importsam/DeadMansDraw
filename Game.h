@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GAME_TITLE_H
 #define GAME_TITLE_H
 #define GAME_TITLE \
@@ -7,7 +6,7 @@
 "| | | | ___   __ _   __| |  | .  . |  __ _  _ __ |/ ___\n" \
 "| | | |/ _ \\ / _` | / _` |  | |\\/| | / _` || '_ \\  / __|\n" \
 "| |/ /|  __/| (_| || (_| |  | |  | || (_| || | | | \\__ \\\n" \
-"|____/  \\___| \\__,_| \\__,_|  \\_|  |_/ \\__,_||_| |_| |___/\n" \
+"|____/ \\___| \\__,_| \\__,_|  \\_|  |_/ \\__,_||_| |_| |___/\n" \
 "|  _  \\                         _      _\n" \
 "| | | | _ __  __ _ __      __ _| |_  _| |_\n" \
 "| | | || '__|/ _` |\\ \\ /\\ / /|_   _||_   _|\n" \
@@ -24,36 +23,43 @@
 
 
 class Game {
-	Player player1;
-	Player player2;
-	CardCollection deck;
-	CardCollection discardPile;
-	int round;
-	int turn;
-	Player* currentPlayer;
-	Player* otherPlayer;
 
-	void cardDrawMessage(Card* card);
+    Player player1;
+    Player player2;
+    CardCollection deck;
+    CardCollection discardPile;
+    int round;
+    int turn;
+    bool busted;
+    Player* currentPlayer;
+    Player* otherPlayer;
+
+    // Announces that the user has drawn a card with the card name
+    void cardDrawMessage(Card* card);
 
 public:
-	/* When you initialise a game, you have to init two players. All their belongings ie play area and deck should be in their own class. */
-
-	Game();
-	void gameStart();
-	void gameEnd() const;
-	void takeTurn();
-	Card* drawCard();
-	void initDeck();
-	void turnInitPrint();
-	void shuffleDeck(CardCollection& cards);
-	Player* getCurrentPlayer() const { return currentPlayer; }
-	Player* getOtherPlayer() const { return otherPlayer; }
-	Card* drawFromDiscardPile();
-	int deckEmpty() const { return deck.empty(); }
-	void bustPlayer(Player& player);
-	void addToDiscardPile(Card* card);
-	CardCollection& getDeck() { return deck; }
-	~Game();
+    /*
+        Constructor for Game.
+ 
+    
+    */ 
+    Game();
+    void gameStart();
+    void gameEnd() const;
+    void takeTurn();
+    Card* drawCard();
+    void initDeck();
+    void turnInitPrint();
+    void shuffleDeck(CardCollection& cards);
+    Player* getCurrentPlayer() const { return currentPlayer; }
+    Player* getOtherPlayer() const { return otherPlayer; }
+    Card* drawFromDiscardPile();
+    int deckEmpty() const { return deck.empty(); }
+    void bustPlayer(Player& player);
+    bool isBusted() const { return busted; }
+    void addToDiscardPile(Card* card);
+    CardCollection& getDeck() { return deck; }
+    ~Game();
 
 };
 

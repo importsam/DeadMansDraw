@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CHESTCARD_H
+#define CHESTCARD_H
+
 #include "Card.h"
 
 
@@ -15,3 +17,5 @@ public:
 
 	void play(Game& game, Player& player) override;
 };
+
+#endif //CHESTCARD_H

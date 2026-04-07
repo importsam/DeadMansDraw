@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CANNONCARD_H
+#define CANNONCARD_H
+
 #include "Card.h"
 #include <iterator>
 class CannonCard : public Card {
@@ -11,3 +13,5 @@ public:
 
 	void play(Game& game, Player& player) override;
 };
+
+#endif //CANNONCARD_H

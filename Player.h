@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "Card.h"
 #include <string>
 #include <map>
@@ -54,3 +56,5 @@ When selecting the name for the player, select it from a random list :
 "Sasha", "Tina", "Marge" };
 • _name = names[rand() % 10];
 */
+
+#endif //PLAYER_H

@@ -20,6 +20,9 @@ void KeyCard::willAddToBank(Game& game, Player& player) {
 	}
 	for (int i = 0; i < numToDraw; i++) {
 		Card* card = game.drawFromDiscardPile();
+		if (card == nullptr) {
+			break;
+		}
 		player.addToPlayArea(card);
 	}
 }

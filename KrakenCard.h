@@ -1,4 +1,6 @@
-#pragma once
+#ifndef KRAKENCARD_H
+#define KRAKENCARD_H
+
 #include "Card.h"
 
 class KrakenCard : public Card {
@@ -11,3 +13,5 @@ public:
 
 	void play(Game& game, Player& player) override;
 };
+
+#endif //KRAKENCARD_H

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ORACLECARD_H
+#define ORACLECARD_H
+
 #include "Card.h"
 
 class OracleCard : public Card {
@@ -11,3 +13,5 @@ public:
 
 	void play(Game& game, Player& player) override;
 };
+
+#endif //ORACLECARD_H
