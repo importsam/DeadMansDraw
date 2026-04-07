@@ -40,25 +40,38 @@ class Game {
 public:
     /*
         Constructor for Game.
- 
-    
+        This initialises players, the deck, and starts the game.
     */ 
     Game();
+    
     void gameStart();
     void gameEnd() const;
+	
+    //Switches the turn of the game. Manages card handling logic.
     void takeTurn();
+    // Draws a card from the deck
     Card* drawCard();
+    // Adds each card into the game's deck
     void initDeck();
+	// Prints the current round, turn, and player's name at the start of each turn.
     void turnInitPrint();
+	// Shuffles the deck of cards
     void shuffleDeck(CardCollection& cards);
+	// returns a pointer to the current player and other player
     Player* getCurrentPlayer() const { return currentPlayer; }
     Player* getOtherPlayer() const { return otherPlayer; }
+	// Draws a card from the discard pile
     Card* drawFromDiscardPile();
+    
     int deckEmpty() const { return deck.empty(); }
+    // Will change the status of a player to busted, ending their turn.
     void bustPlayer(Player& player);
+    
     bool isBusted() const { return busted; }
+	// Adds a card to the discard pile
     void addToDiscardPile(Card* card);
     CardCollection& getDeck() { return deck; }
+	// Destructor for Game. Frees memory of cards in the deck and discard pile
     ~Game();
 
 };

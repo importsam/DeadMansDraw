@@ -15,7 +15,7 @@
 #include <random> 
 #include <utility> 
 
-// 
+
 Game::Game() {
 	round = 1;
 	turn = 1;
@@ -30,6 +30,7 @@ Game::Game() {
 	gameStart();
 }
 
+// Continuously take turns until the deck is empty.
 void Game::gameStart() {
 	while (!deckEmpty()) {
 		takeTurn();
@@ -53,8 +54,10 @@ void Game::gameEnd() const {
 }
 
 void Game::takeTurn() {
+
 	busted = false;
 	turnInitPrint();
+
 	Card* card = drawCard();
 	if (card == nullptr) {
 		return;

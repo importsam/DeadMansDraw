@@ -7,6 +7,7 @@ Player::Player() {
 	_name = names[rand() % 10];
 }
 
+// Plays a card into the play area and returns whether the player has busted as true or false.
 bool Player::playCard(Card* card, Game& game) {
 	
 
@@ -35,6 +36,7 @@ void Player::addToBank(Game& game) {
 	playArea.clear();
 }
 
+// The user has bust if there are two of the same CardType in the play area.
 bool Player::isBust(Card* card) const {
 	return playArea.count(card->type()) > 0;
 }
@@ -81,7 +83,9 @@ int Player::getScore() const {
 }
 
 Card* Player::removeTopCardFromBank(CardType suit) {
-	if (bank.count(suit) == 0) { return nullptr; }
+	if (bank.count(suit) == 0) { 
+		return nullptr; 
+	}
 	if (bank[suit].empty()) { 
 		bank.erase(suit); 
 		return nullptr; 

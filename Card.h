@@ -17,16 +17,20 @@ class Card {
 	int pointValue;
 
 public:
+	// Constructor initialises the suit and point value of the card
 	Card(CardType suit, int pointValue) : suit(suit), pointValue(pointValue) {}
 	
 	const CardType& type() const { return suit; }
 
 	int getPointValue() const { return pointValue; }
 
+	//Abstract function to return the card description (e.g. “Oracle(7)”)
 	virtual std::string str() const = 0;
 
+	// abstract function to play the card's ability
 	virtual void play(Game& game, Player& player) = 0;
 
+	// function to handle any special ability that occurs when the card is added to the bank
 	virtual void willAddToBank(Game& game, Player& player) {};
 
 	virtual ~Card() {}

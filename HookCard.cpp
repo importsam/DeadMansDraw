@@ -1,6 +1,6 @@
 #include "HookCard.h"
 #include <iostream>
-
+#include <limits>
 #include "Game.h"
 #include "Player.h"
 std::string HookCard::str() const {
@@ -21,9 +21,18 @@ void HookCard::play(Game& game, Player& player) {
 		i++;
 	}
 
+	int min = 1;
+	int max = player.getBank().size();
 	int choice;
-	std::cout << "        Which card do you pick? ";
-	std::cin >> choice;
+	while (1) {
+		std::cin >> choice;
+		if (choice >= min && choice <= max) {
+			break;
+		}
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+		std::cout << "\tInvalid input.";
+	}
 
 	auto itr = player.getBank().begin();
 	std::advance(itr, choice - 1);
