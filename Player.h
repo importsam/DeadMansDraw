@@ -1,14 +1,15 @@
 #pragma once
+#include "Card.h"
 #include <string>
 #include <map>
 #include <vector>
-#include "Card.h"
+
+class Game;
 
 class Player {
 	std::string _name;
 	std::map<CardType, CardCollection> playArea;
 	std::map<CardType, CardCollection> bank;
-	
 
 public:
 	Player();
@@ -18,13 +19,14 @@ public:
 	// otherwise the card's ability is performed and this function returns false
 	bool playCard(Card* card, Game& game);
 	void addToPlayArea(Card* card);
-	void addToBank(std::map<CardType, std::vector<Card*>>& playArea);
+	void addToBank(Game& game);
 	void printPlayArea();
-	void clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile);
+	void clearPlayArea(CardCollection& discardPile);
 	void printBank();
 	std::string getName() const;
 	int getScore() const;
 	Card* removeTopCardFromBank(CardType type);
+	std::map<CardType, CardCollection>& getPlayArea() { return playArea; }
 	//Card* pickTopCardFromBank();
 
 	std::map<CardType, CardCollection>& getBank() { return bank; }

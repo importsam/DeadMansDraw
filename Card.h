@@ -2,8 +2,7 @@
 
 #include <vector>
 #include <string>
-#include "Game.h"
-#include "Player.h"
+
 class Game;
 class Player;
 

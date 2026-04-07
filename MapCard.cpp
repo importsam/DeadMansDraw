@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Game.h"
 #include "Player.h"
+
+
 std::string MapCard::str() const {
 	return "Map(" + std::to_string(getPointValue()) + ")";
 }
@@ -19,28 +21,29 @@ void MapCard::play(Game& game, Player& player) {
 		std::cout << "\t\tDiscard pile empty. Continue playing." << std::endl;
 	}
 
-	cout << "\t\tDraw 3 cards from the discard and pick one to add to the play area:" << endl;
+
+	std::cout << "\t\tDraw 3 cards from the discard and pick one to add to the play area:" << std::endl;
 
 	int choice;
-	cout << "\t\tWhich card do you pick? ";
-	cin >> choice;
+	std::cout << "\t\tWhich card do you pick? ";
+	std::cin >> choice;
 
-	i = 1;
+	int i = 1;
 	for (Card* card : cards) {
-		cout << "        (" << i << ") " << card->str() << endl;
-		i++
+		std::cout << "        (" << i << ") " << card->str() << std::endl;
+		i++;
 	}
 
-	Card* chosen = drawn[choice - 1];
+	Card* chosen = cards[static_cast<size_t>(choice - 1)];
 	bool bustStatus = player.playCard(chosen, game);
 
 	if (bustStatus) {
 		game.bustPlayer(player);
 	}
 
-	for (int i = 0; i < drawn.size(); i++) {
-		if (drawn[i] != chosen) {
-			game.addToDiscardPile(drawn[i]);
+	for (Card* card : cards) {
+		if (card != chosen) {
+			game.addToDiscardPile(card);
 		}
 	}
 

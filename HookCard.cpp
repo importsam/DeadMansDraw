@@ -3,30 +3,32 @@
 
 #include "Game.h"
 #include "Player.h"
-HookCard::str() const {
+std::string HookCard::str() const {
 	return "Hook(" + std::to_string(getPointValue()) + ")";
 }
 
-HookCard::play(Game& game, Player& player) {
-	Player& otherPlayer = game.getOtherPlayer();
+void HookCard::play(Game& game, Player& player) {
 
 	if (player.getBank().empty()) {
 		std::cout << "        No cards in your Bank. Play continues." << std::endl;
 		return;
 	}
 
-	cout << "        Select a highest-value card from any of the suits in your Bank:" << endl;
+	std::cout << "        Select a highest-value card from any of the suits in your Bank:" << std::endl;
 	int i = 1;
 	for (auto& pair : player.getBank()) {
-		cout << "        (" << i << ") " << pair.second.front()->str() << endl;
+		std::cout << "        (" << i << ") " << pair.second.front()->str() << std::endl;
 		i++;
 	}
 
 	int choice;
-	cout << "        Which card do you pick? ";
-	cin >> choice;
+	std::cout << "        Which card do you pick? ";
+	std::cin >> choice;
 
-	Card* removedCard = other.removeTopCardFromBank(itr->first);
+	auto itr = player.getBank().begin();
+	std::advance(itr, choice - 1);
+
+	Card* removedCard = player.removeTopCardFromBank(itr->first);
 
 	bool bustStatus = player.playCard(removedCard, game);
 	if (bustStatus) {

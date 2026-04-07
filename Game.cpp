@@ -24,7 +24,7 @@ Game::Game() {
 	otherPlayer = &player2; // non-playing player
 	initDeck();
 	std::cout << GAME_TITLE << std::endl;
-	printf("Starting Dead Man's Draw++\n");
+	std::cout << "Starting Dead Man's Draw++!" << std::endl;
 	gameStart();
 }
 
@@ -53,6 +53,9 @@ void Game::gameEnd() const {
 void Game::takeTurn() {
 	turnInitPrint();
 	Card* card = drawCard();
+	if (card == nullptr) {
+		return;
+	}
 	cardDrawMessage(card);
 
 	bool bustStatus = currentPlayer->playCard(card, *this);
@@ -88,21 +91,20 @@ void Game::takeTurn() {
 }
 
 Card* Game::drawCard() {
-	// what if deck empty 
-
+	if (deck.empty()) { return nullptr; }
 	Card* card = deck.back();
 	deck.pop_back();
 	return card;
 }
 
 void Game::cardDrawMessage(Card* card) {
-	std::cout << currentPlayer->getName() << " Draws a " << card->str() << std::endl;
+	std::cout << currentPlayer->getName() << " draws a " << card->str() << std::endl;
 	//std::cout << "        " << card->specialAbility() << std::endl;
 }
 
 void Game::turnInitPrint() {
+	std::cout << "--- Round " << round << ", Turn " << turn << " ---" << std::endl;
 	std::cout << currentPlayer->getName() << "'s turn." << std::endl;
-	std::cout << currentPlayer->getName() << "'s Bank:" << std::endl << currentPlayer->printBank() << std::endl;
 	currentPlayer->printBank();
 }
 
@@ -111,17 +113,17 @@ void Game::initDeck() {
 	int mermaidValues[] = { 4, 5, 6, 7, 8, 9 };
 
 	for (int val : cardValues) {
-		deck.push_back(new Cannon(val));
-		deck.push_back(new Chest(val));
-		deck.push_back(new Key(val));
-		deck.push_back(new Sword(val));
-		deck.push_back(new Hook(val));
-		deck.push_back(new Oracle(val));
-		deck.push_back(new Map(val));
+		deck.push_back(new CannonCard(val));
+		deck.push_back(new ChestCard(val));
+		deck.push_back(new KeyCard(val));
+		deck.push_back(new SwordCard(val));
+		deck.push_back(new HookCard(val));
+		deck.push_back(new OracleCard(val));
+		deck.push_back(new MapCard(val));
 	}
 
 	for (int val : mermaidValues) {
-		deck.push_back(new Mermaid(val));
+		deck.push_back(new MermaidCard(val));
 	}
 
 	shuffleDeck(deck);
@@ -144,8 +146,13 @@ Card* Game::drawFromDiscardPile() {
 }
 
 void Game::bustPlayer(Player& player) {
-	std::cout << "BUST! " << player.getName() << "loses all cards in play area." << std::endl;
+	std::cout << "BUST! " << player.getName() << " loses all cards in play area." << std::endl;
 	player.clearPlayArea(discardPile);
+}
+
+void Game::addToDiscardPile(Card* card) {
+	discardPile.push_back(card);
+	return;
 }
 
 Game::~Game() {

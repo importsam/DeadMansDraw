@@ -10,5 +10,5 @@ public:
 
 	void play(Game& game, Player& player) override;
 
-	void KeyCard::willAddToBank(Game& game, Player& player) override;
+	void willAddToBank(Game& game, Player& player) override;
 };

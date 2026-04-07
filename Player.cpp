@@ -25,17 +25,10 @@ void Player::addToPlayArea(Card* card) {
 	playArea[card->type()].push_back(card);
 }
 
-void Player::addToBank(std::map<CardType, std::vector<Card*>>& playArea) {
+void Player::addToBank(Game& game) {
 	for (auto& pair : playArea) {
 		for (Card* card : pair.second) {
 			card->willAddToBank(game, *this);
-			bank[pair.first].push_back(card);
-		}
-	}
-
-	// move cards from play area to bank
-	for (auto& pair : playArea) {
-		for (Card* card : pair.second) {
 			bank[pair.first].push_back(card);
 		}
 	}
@@ -48,13 +41,19 @@ bool Player::isBust(Card* card) const {
 }
 
 void Player::printPlayArea() {
-	return;
-}
-
-void Player::clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile) {
+	std::cout << _name << "'s Play Area:" << std::endl;
 	for (auto& pair : playArea) {
 		for (Card* card : pair.second) {
-			discardPile[card->type()].push_back(card);
+			std::cout << "        " << card->str() << std::endl;
+		}
+	}
+	std::cout << std::endl;
+}
+
+void Player::clearPlayArea(CardCollection& discardPile) {
+	for (auto& pair : playArea) {
+		for (Card* card : pair.second) {
+			discardPile.push_back(card);
 		}
 	}
 	playArea.clear();
@@ -62,9 +61,10 @@ void Player::clearPlayArea(std::map<CardType, std::vector<Card*>>& discardPile) 
 
 void Player::printBank() {
 	std::cout << _name << "'s Bank:" << std::endl;
-	for (Card* card : bank) {
-		std::cout << card->str() << std::endl;
+	for (auto& pair : bank) {
+		std::cout << pair.second.front()->str() << std::endl;
 	}
+	std::cout << "| Score: " << getScore() << std::endl;
 }
 
 std::string Player::getName() const {
@@ -83,9 +83,16 @@ int Player::getScore() const {
 
 Card* Player::removeTopCardFromBank(CardType suit) {
 	if (bank.count(suit) == 0) { return nullptr; }
-	if (bank[suit].empty()) { bank.erase(suit); }
+	if (bank[suit].empty()) { 
+		bank.erase(suit); 
+		return nullptr; 
+	}
 
 	Card* card = bank[suit].front();
+	bank[suit].erase(bank[suit].begin());
+	if (bank[suit].empty()) {
+		bank.erase(suit);
+	}
 
 	return card;
 

@@ -1,24 +1,27 @@
+#pragma once
 #ifndef GAME_TITLE_H
 #define GAME_TITLE_H
 #define GAME_TITLE \
-"______ _ ___ ___ _ \n" \
-"| _ \\ | | | \\/ | ( ) \n" \
-"| | | | ___ __ _ __| | | . . | __ _ _ __ |/ ___ \n" \
-"| | | |/ _ \\ / _` | / _` | | |\\/| | / _` || '_ \\ / __|\n" \
-"| |/ /| __/| (_| || (_| | | | | || (_| || | | | \\__ \\ \n" \
-"______ \\___| \\__,_| \\__,_| \\_| |_/ \\__,_||_| |_| |___/\n" \
-"| _ \\ _ _\n" \
-"| | | | _ __ __ _ __ __ _| |_ _| |_\n" \
-"| | | || '__|/ _` |\\ \\ /\\ / /|_ _||_ _|\n" \
-"| |/ / | | | (_| | \\ V V / |_| |_|\n" \
-"|___/ |_| \\__,_| \\_/\\_/\n"
+"______                  _   ___  ___              _\n" \
+"|  _  \\                | |  |  \\/  |             ( )\n" \
+"| | | | ___   __ _   __| |  | .  . |  __ _  _ __ |/ ___\n" \
+"| | | |/ _ \\ / _` | / _` |  | |\\/| | / _` || '_ \\  / __|\n" \
+"| |/ /|  __/| (_| || (_| |  | |  | || (_| || | | | \\__ \\\n" \
+"|____/  \\___| \\__,_| \\__,_|  \\_|  |_/ \\__,_||_| |_| |___/\n" \
+"|  _  \\                         _      _\n" \
+"| | | | _ __  __ _ __      __ _| |_  _| |_\n" \
+"| | | || '__|/ _` |\\ \\ /\\ / /|_   _||_   _|\n" \
+"| |/ / | |  | (_| | \\ V  V /   |_|    |_|\n" \
+"|___/  |_|   \\__,_|  \\_/\\_/\n"
 #endif //GAME_TITLE_H
+
+#include "Card.h"
+#include "Player.h"
 
 #include <map>
 #include <string>
 
-#include "Card.h"
-#include "Player.h"
+
 
 class Game {
 	Player player1;
@@ -41,12 +44,15 @@ public:
 	void takeTurn();
 	Card* drawCard();
 	void initDeck();
+	void turnInitPrint();
 	void shuffleDeck(CardCollection& cards);
 	Player* getCurrentPlayer() const { return currentPlayer; }
 	Player* getOtherPlayer() const { return otherPlayer; }
 	Card* drawFromDiscardPile();
 	int deckEmpty() const { return deck.empty(); }
 	void bustPlayer(Player& player);
+	void addToDiscardPile(Card* card);
+	CardCollection& getDeck() { return deck; }
 	~Game();
 
 };

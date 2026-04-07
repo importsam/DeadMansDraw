@@ -15,10 +15,10 @@ void SwordCard::play(Game& game, Player& player) {
 		return;
 	}
 
-	std::cout << "        Steal the top card of any suit from the other player's Bank into your Play Area:" << endl;
+	std::cout << "        Steal the top card of any suit from the other player's Bank into your Play Area:" << std::endl;
 	int i = 1;
 	for (auto& pair : otherPlayer.getBank()) {
-		std::cout << "        (" << i << ") " << pair.second.front()->str() << endl;
+		std::cout << "        (" << i << ") " << pair.second.front()->str() << std::endl;
 		i++;
 	}
 
@@ -29,9 +29,9 @@ void SwordCard::play(Game& game, Player& player) {
 	auto itr = otherPlayer.getBank().begin();
 	std::advance(itr, choice - 1);
 
-	Card* removedCard = other.removeTopCardFromBank(itr->first);
+	Card* removedCard = otherPlayer.removeTopCardFromBank(itr->first);
 
-	bool bustStatus = player.playCard(removedCard, player);
+	bool bustStatus = player.playCard(removedCard, game);
 	if (bustStatus) {
 		game.bustPlayer(player);
 	}
