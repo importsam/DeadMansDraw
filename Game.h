@@ -62,6 +62,7 @@ public:
     Player* getOtherPlayer() const { return otherPlayer; }
 	// Draws a card from the discard pile
     Card* drawFromDiscardPile();
+    int getValidChoice(int min, int max);
     
     int deckEmpty() const { return deck.empty(); }
     // Will change the status of a player to busted, ending their turn.

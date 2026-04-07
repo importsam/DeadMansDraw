@@ -31,9 +31,8 @@ void MapCard::play(Game& game, Player& player) {
 		i++;
 	}
 
-	int choice;
 	std::cout << "\tWhich card do you pick? ";
-	std::cin >> choice;
+	int choice = game.getValidChoice(1, cards.size());
 
 	Card* chosen = cards[static_cast<size_t>(choice - 1)];
 	bool bustStatus = player.playCard(chosen, game);

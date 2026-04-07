@@ -12,6 +12,7 @@
 #include "KrakenCard.h"
 #include "MermaidCard.h"
 #include <algorithm>
+#include <limits>
 #include <random> 
 #include <utility> 
 
@@ -152,6 +153,18 @@ Card* Game::drawFromDiscardPile() {
 	Card* card = discardPile.back();
 	discardPile.pop_back();
 	return card;
+}
+
+int Game::getValidChoice(int min, int max) {
+	int choice;
+	while (true) {
+		if (std::cin >> choice && choice >= min && choice <= max) {
+			return choice;
+		}
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "\tInvalid input." << std::endl;
+	}
 }
 
 void Game::bustPlayer(Player& player) {

@@ -27,7 +27,7 @@ void CannonCard::play(Game& game, Player& player) {
 
 	int choice;
 	std::cout << "        Which card do you pick? ";
-	std::cin >> choice;
+	choice = game.getValidChoice(1, otherPlayer.getBank().size());
 
 	auto itr = otherPlayer.getBank().begin();
 	std::advance(itr, choice - 1);
