@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <algorithm>
 
 class Game;
 
@@ -24,7 +25,7 @@ public:
 	void addToBank(Game& game);
 	void printPlayArea();
 	void clearPlayArea(CardCollection& discardPile);
-	void printBank();
+	void printBank() const;
 	std::string getName() const;
 	int getScore() const;
 	Card* removeTopCardFromBank(CardType type);

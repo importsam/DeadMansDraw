@@ -60,10 +60,23 @@ void Player::clearPlayArea(CardCollection& discardPile) {
 	playArea.clear();
 }
 
-void Player::printBank() {
+void Player::printBank() const {
 	std::cout << _name << "'s Bank:" << std::endl;
 	for (auto& pair : bank) {
-		std::cout << pair.second.front()->str() << std::endl;
+		// sort the cards for this suit for the sake of printing in order of point value
+		CardCollection sortedCards = pair.second;
+		std::sort(sortedCards.begin(), sortedCards.end(), [](Card* a, Card* b) {
+			return a->getPointValue() > b->getPointValue();
+		});
+
+		std::cout << "\t";
+
+		for (Card* card : sortedCards) {
+			std::cout << card->str() << " ";
+		}
+
+		std::cout << std::endl;
+		
 	}
 	std::cout << "| Score: " << getScore() << std::endl;
 }
@@ -75,9 +88,11 @@ std::string Player::getName() const {
 int Player::getScore() const {
 	int score = 0;
 	for (auto& pair : bank) {
+		int maxPointValue = 0;
 		for (Card* card : pair.second) {
-			score += card->getPointValue();
+			maxPointValue = std::max(maxPointValue, card->getPointValue());
 		}
+		score += maxPointValue;
 	}
 	return score;
 }

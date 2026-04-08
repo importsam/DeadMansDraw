@@ -40,9 +40,15 @@ void Game::gameStart() {
 }
 
 void Game::gameEnd() const {
-	std::cout << "Game Over!" << std::endl;
-	std::cout << player1.getName() << "'s score: " << player1.getScore() << std::endl;
-	std::cout << player2.getName() << "'s score: " << player2.getScore() << std::endl;
+	std::cout << "--- Game Over! ---" << std::endl;
+	std::cout << player1.getName() << "'s Bank: " << std::endl;
+	player1.printBank();
+	std::cout << player1.getScore() << std::endl;
+	
+	std::cout << player2.getName() << "'s Bank: " << std::endl;
+	player2.printBank();
+	std::cout << player2.getScore() << std::endl;
+
 	if (player1.getScore() > player2.getScore()) {
 		std::cout << player1.getName() << " wins!" << std::endl;
 	}
@@ -163,7 +169,7 @@ int Game::getValidChoice(int min, int max) {
 		}
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "\tInvalid input." << std::endl;
+		std::cout << "\tInvalid input. Try again: ";
 	}
 }
 
