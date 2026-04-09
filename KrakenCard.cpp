@@ -20,7 +20,7 @@ void KrakenCard::play(Game& game, Player& player) {
 
 		bool bustStatus = player.playCard(card, game);
 		if (bustStatus) {
-			game.bustPlayer(player);
+			game.setBust();
 			return;
 		}
 

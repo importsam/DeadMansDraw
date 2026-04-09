@@ -18,15 +18,16 @@ void CannonCard::play(Game& game, Player& player) {
 
 	// Discard the highest value card from the other player's bank 
 	std::cout << "        Shoot the top card of any suit from the other player's Bank into the Discard Pile:" << std::endl;
+
 	int i = 1;
 	for (auto& pair : otherPlayer.getBank()) {
-		std::cout << "        (" << i << ") " << pair.second.front()->str() << std::endl;
+
+		std::cout << "\t(" << i << ") " << pair.second.front()->str() << std::endl;
 		i++;
 	}
 
-
 	int choice;
-	std::cout << "        Which card do you pick? ";
+	std::cout << "        Which card do you pick? " << std::flush;
 	choice = game.getValidChoice(1, otherPlayer.getBank().size());
 
 	auto itr = otherPlayer.getBank().begin();

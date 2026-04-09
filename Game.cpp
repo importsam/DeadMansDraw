@@ -41,11 +41,9 @@ void Game::gameStart() {
 
 void Game::gameEnd() const {
 	std::cout << "--- Game Over! ---" << std::endl;
-	std::cout << player1.getName() << "'s Bank: " << std::endl;
 	player1.printBank();
 	std::cout << player1.getScore() << std::endl;
 	
-	std::cout << player2.getName() << "'s Bank: " << std::endl;
 	player2.printBank();
 	std::cout << player2.getScore() << std::endl;
 
@@ -71,8 +69,10 @@ void Game::takeTurn() {
 	}
 	cardDrawMessage(card);
 
+	// check if the current player is busted after playing the first card they draw
 	bool bustStatus = currentPlayer->playCard(card, *this);
 
+	// while they aren't busted, they can keep drawing.
 	while (!bustStatus && !busted) {
 		currentPlayer->printPlayArea();
 
@@ -94,6 +94,7 @@ void Game::takeTurn() {
 
 	}
 
+	// if busted, we bust them and move all their cards to the discard pile
 	if (bustStatus || busted) {
 		bustPlayer(*currentPlayer);
 	}
@@ -101,6 +102,7 @@ void Game::takeTurn() {
 		currentPlayer->addToBank(*this);
 	}
 
+	// switch players for next turn
 	std::swap(currentPlayer, otherPlayer);
 	turn++;
 	if (turn % 2 == 1) { round++; }
@@ -164,7 +166,8 @@ Card* Game::drawFromDiscardPile() {
 int Game::getValidChoice(int min, int max) {
 	int choice;
 	while (true) {
-		if (std::cin >> choice && choice >= min && choice <= max) {
+		std::cin >> choice;
+		if (choice >= min && choice <= max) {
 			return choice;
 		}
 		std::cin.clear();
@@ -184,6 +187,11 @@ void Game::addToDiscardPile(Card* card) {
 	return;
 }
 
+void Game::setBust() {
+	busted = true;
+	return;
+}
+
 Game::~Game() {
 	for (Card* card : deck) {
 		delete card;
@@ -196,4 +204,6 @@ Game::~Game() {
 	}
 
 	discardPile.clear();
+
+
 }

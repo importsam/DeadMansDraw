@@ -73,6 +73,7 @@ public:
     void addToDiscardPile(Card* card);
     CardCollection& getDeck() { return deck; }
 	// Destructor for Game. Frees memory of cards in the deck and discard pile
+    void setBust();
     ~Game();
 
 };

@@ -13,7 +13,8 @@ class Player {
 	std::string _name;
 	std::map<CardType, CardCollection> playArea;
 	std::map<CardType, CardCollection> bank;
-
+	void sortBank();
+	void sortPlayArea();
 public:
 	Player();
 	bool isBust (Card* card) const;
@@ -32,8 +33,9 @@ public:
 	std::map<CardType, CardCollection>& getPlayArea() { return playArea; }
 	//Card* pickTopCardFromBank();
 
-	std::map<CardType, CardCollection>& getBank() { return bank; }
-
+	const std::map<CardType, CardCollection>& getBank() const { return bank; }
+	
+	~Player();
 };
 
 /*

@@ -38,7 +38,8 @@ void MapCard::play(Game& game, Player& player) {
 	bool bustStatus = player.playCard(chosen, game);
 
 	if (bustStatus) {
-		game.bustPlayer(player);
+		game.addToDiscardPile(chosen);
+		game.setBust();
 	}
 
 	for (Card* card : cards) {
