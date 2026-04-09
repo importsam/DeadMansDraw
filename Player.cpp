@@ -3,7 +3,6 @@
 #include "Game.h"
 #include <iostream>
 
-
 Player::Player() {
 	std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue", "Sasha", "Tina", "Marge" };
 	_name = names[rand() % 10];
@@ -152,6 +151,7 @@ std::string Player::getName() const {
 }
 
 int Player::getScore() const {
+	// We score the highest point value for each suit
 	int score = 0;
 	for (auto& pair : bank) {
 		int maxPointValue = 0;
@@ -164,6 +164,8 @@ int Player::getScore() const {
 }
 
 Card* Player::removeTopCardFromBank(CardType suit) {
+	// Since the bank is already sorted, we such remove the front card of the suit.
+
 	if (bank.count(suit) == 0) { 
 		return nullptr; 
 	}
